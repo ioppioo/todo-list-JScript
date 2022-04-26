@@ -1,0 +1,35 @@
+@font-face {
+    font-family: FiraSansExtraCondensed-SemiBold;
+    src: url(../fonts/FiraSansExtraCondensed-SemiBold.ttf);
+}
+
+@font-face {
+    font-family: FiraSansExtraCondensed-ExtraLight;
+    src: url(../fonts/FiraSansExtraCondensed-ExtraLight.ttf);
+}
+
+.body {
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    background-color: antiquewhite;
+    max-width: 270px;
+}
+
+.to-do-list {
+    font-family: FiraSansExtraCondensed-ExtraLight, sans-serif;
+    font-size: 18px;
+    color: #2c2c2c;
+}
+
+.title {
+    font-family: FiraSansExtraCondensed-SemiBold, sans-serif;
+    padding-left: 15px;
+}
+
+.task {
+    padding-left: 30px;
+}
+
