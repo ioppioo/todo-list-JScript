@@ -5,11 +5,12 @@
     <title>Title</title>
     <link rel="stylesheet" href="styles/style-task.css">
 </head>
+
 <body>
-<div class = "container">
-    <div class = "to-do-list">
-        <h2 class = "title">Задачи недели</h2>
-        <ol class = "task">
+<div class="container">
+    <div class="note">
+        <h2 class="title-note">Задачи недели</h2>
+        <ol class="tasks">
             <li>Написать html</li>
             <li>Написать стили</li>
             <li>Почитать и решить задачи по js</li>
@@ -17,5 +18,39 @@
         </ol>
     </div>
 </div>
+
+<div class="container">
+    <div class="note">
+        <h2 class="title-note">Задачи недели</h2>
+        <ol class="tasks">
+            <li class="done">Написать html</li>
+            <li class="done">Написать стили</li>
+            <li class="done">Почитать и решить задачи по js и так далее</li>
+            <li class="done">Поесть</li>
+        </ol>
+    </div>
+</div>
+
+<div class="container">
+    <div class="note new-color">
+        <h2 class="title-note">Задачи недели</h2>
+        <ol class="tasks">
+            <li>Написать html</li>
+            <li class="done">Написать стили</li>
+            <li>Почитать и решить задачи по js</li>
+            <li>Поесть</li>
+        </ol>
+    </div>
+</div>
+
+<div id="get-note" class="container">
+    <div class="new-note">
+        <h2 class="title-note">Новый список...</h2>
+        <p>Список дел</p>
+    </div>
+</div>
+
+<script src="script/script.js"></script>
+
 </body>
 </html>

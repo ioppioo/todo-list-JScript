@@ -13,23 +13,94 @@
 }
 
 .container {
-    display: flex;
-    background-color: antiquewhite;
-    max-width: 270px;
-}
-
-.to-do-list {
+    display: inline-flex;
+    position: relative;
     font-family: FiraSansExtraCondensed-ExtraLight, sans-serif;
     font-size: 18px;
     color: #2c2c2c;
 }
 
-.title {
+.note {
+    background-color: antiquewhite;
+    width: 270px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.title-note {
     font-family: FiraSansExtraCondensed-SemiBold, sans-serif;
+    padding-left: 15px;
+    position: relative;
+}
+
+.tasks {
+    padding-left: 30px;
+}
+
+li {
+    position: relative;
+}
+
+/* цвет для заметки */
+
+.new-color {
+    background-color: #b7dbdc;
+}
+
+/* стили для выполненных задач */
+.done {
+    color: #9d9d9d;
+    font-style: italic;
+    text-decoration: line-through;
+}
+
+/* стили пустой новой заметки*/
+
+
+
+/* стили для новой заметки */
+
+.new-note {
+    background-color: #fcf6f2;
+    font-style: italic;
+    width: 270px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+}
+
+.new-note p {
     padding-left: 15px;
 }
 
-.task {
-    padding-left: 30px;
+.button {
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #2c2c2c;
+}
+
+.button-task-new {
+    font-size: 50px;
+    top: -5px;
+    left: 190px;
+}
+
+.button-task-redact {
+    font-size: 14px;
+}
+
+.button-title-redact {
+    font-size: 14px;
+    top: 6px;
+}
+
+.button-task-del {
+    font-size: 22px;
+    top: 9px;
+    left: 225px;
 }
 
