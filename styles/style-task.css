@@ -71,6 +71,11 @@ li {
     cursor: pointer;
 }
 
+.title-new-note {
+    font-family: FiraSansExtraCondensed-SemiBold, sans-serif;
+    padding-left: 15px;
+}
+
 .new-note p {
     padding-left: 15px;
 }
