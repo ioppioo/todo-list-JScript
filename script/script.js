@@ -29,7 +29,6 @@ function createRedactTaskButton() {
     return redactButton;
 }
 
-
 // подтверждение выполнения задачи
 for (let task of tasks) {
     task.appendChild(createRedactTaskButton());
@@ -38,36 +37,9 @@ for (let task of tasks) {
     }
 }
 
-
-// let tasks = document.querySelectorAll("ol > li");
-//
-// for (let task of tasks) {
-//     task.insertAdjacentHTML('beforeend', '<button class="button button-task-redact" >✎</button>');
-//     task.onclick = function () {
-//     }
-// }
-//
-// // кнопка редактирования заголовка задачи
-//
-// let titleTasks = document.querySelectorAll(".title-note");
-//
-// for (let title of titleTasks) {
-//     title.insertAdjacentHTML('beforeend', '<button class="button button-title-redact" >✎</button>');
-//     title.onclick = function () {
-//     }
-// }
-//
-// // добавлет кнопку создания новой задачи
-//
-// let notes = document.querySelectorAll("ol > li:last-child");
-//
-// for (let newTask of notes) {
-//     newTask.insertAdjacentHTML('beforeend', '<button class="button button-task-new">+</button>');
-//     newTask.lastChild.onclick = function () {
-//     }
-// }
-
 // кнопка удаления заметки
+
+// function delButton () {}
 
 let note = document.querySelectorAll(".note");
 
@@ -77,3 +49,47 @@ for (let taskDel of note) {
         taskDel.remove();
     }
 }
+
+// // кнопка редактирования заголовка задачи
+//
+// let titleTasks = document.querySelectorAll(".title-note");
+//
+// for (let title of titleTasks) {
+//     title.insertAdjacentHTML('beforeend', '<button class="button button-title-redact" >✎</button>');
+//     title.onclick = function () {
+//     }
+// }
+
+// добавлет кнопку создания новой задачи
+
+let notes = document.querySelectorAll(".note");
+
+function createNewTaskButton() {
+    let newTaskButton = document.createElement('button');
+    newTaskButton.className = 'button button-task-new';
+    newTaskButton.innerText = '+';
+    newTaskButton.onclick = function (event) {
+        let task = event.target.parentElement;
+        addTask(task);
+    }
+
+    return newTaskButton;
+}
+
+for (let newTask of notes) {
+    newTask.appendChild(createNewTaskButton());
+
+}
+
+function addTask () {
+    let newLi = document.createElement('li');
+
+    return newLi;
+}
+// добавляет новую заметку
+
+// function creatNewNoteButton () {
+//     let newNote = document.querySelector('.new-note');
+//     newNote.onclick = function ()
+//
+// }

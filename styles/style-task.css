@@ -74,12 +74,13 @@
 
 .button-task-new {
     font-size: 40px;
-    top: -5px;
-    left: 190px;
+    bottom: 0px;
+    left: 223px;
 }
 
 .button-task-redact {
     font-size: 14px;
+    color: #9d9d9d;
 }
 
 .button-title-redact {
