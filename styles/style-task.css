@@ -12,34 +12,29 @@
     margin: 0;
 }
 
-.container {
+.note {
+    background-color: antiquewhite;
+    width: 270px;
+    border-radius: 20px;
+    margin-bottom: 10px;
     display: inline-flex;
+    flex-direction: column;
     position: relative;
     font-family: FiraSansExtraCondensed-ExtraLight, sans-serif;
     font-size: 18px;
     color: #2c2c2c;
 }
 
-.note {
-    background-color: antiquewhite;
-    width: 270px;
-    border-radius: 20px;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-}
-
 .title-note {
     font-family: FiraSansExtraCondensed-SemiBold, sans-serif;
     padding-left: 15px;
+    max-width: 218px;
     position: relative;
 }
 
 .tasks {
+    margin-top: 0;
     padding-left: 30px;
-}
-
-li {
-    position: relative;
 }
 
 /* цвет для заметки */
@@ -53,30 +48,19 @@ li {
     color: #9d9d9d;
     font-style: italic;
     text-decoration: line-through;
+    position: relative;
 }
-
-/* стили пустой новой заметки*/
-
-
 
 /* стили для новой заметки */
 
 .new-note {
     background-color: #fcf6f2;
     font-style: italic;
-    width: 270px;
-    border-radius: 20px;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
     cursor: pointer;
 }
 
 .title-new-note {
     font-family: FiraSansExtraCondensed-SemiBold, sans-serif;
-    padding-left: 15px;
-}
-
-.new-note p {
     padding-left: 15px;
 }
 
@@ -89,7 +73,7 @@ li {
 }
 
 .button-task-new {
-    font-size: 50px;
+    font-size: 40px;
     top: -5px;
     left: 190px;
 }
@@ -108,4 +92,3 @@ li {
     top: 9px;
     left: 225px;
 }
-
