@@ -12,9 +12,7 @@
     margin: 0;
 }
 
-.container {
-    display: inline-flex;
-    position: relative;
+.notes {
     font-family: FiraSansExtraCondensed-ExtraLight, sans-serif;
     font-size: 18px;
     color: #2c2c2c;
@@ -25,27 +23,39 @@
     width: 270px;
     border-radius: 20px;
     margin-bottom: 10px;
-    padding-bottom: 10px;
+    display: inline-flex;
+    flex-direction: column;
+    position: relative;
 }
 
 .title-note {
     font-family: FiraSansExtraCondensed-SemiBold, sans-serif;
     padding-left: 15px;
+    max-width: 218px;
     position: relative;
 }
 
 .tasks {
+    margin-top: 0;
     padding-left: 30px;
-}
-
-li {
-    position: relative;
 }
 
 /* цвет для заметки */
 
-.new-color {
-    background-color: #b7dbdc;
+.note--indianred {
+    background-color: indianred;
+}
+
+.note--lavender {
+    background-color: lavender;
+}
+
+.note--antiquewhite {
+    background-color: antiquewhite;
+}
+
+.note--teal {
+    background-color: #58a8a8;
 }
 
 /* стили для выполненных задач */
@@ -53,11 +63,8 @@ li {
     color: #9d9d9d;
     font-style: italic;
     text-decoration: line-through;
+    position: relative;
 }
-
-/* стили пустой новой заметки*/
-
-
 
 /* стили для новой заметки */
 
@@ -67,16 +74,14 @@ li {
     width: 270px;
     border-radius: 20px;
     margin-bottom: 10px;
-    padding-bottom: 10px;
+    display: inline-flex;
+    flex-direction: column;
+    position: relative;
     cursor: pointer;
 }
 
 .title-new-note {
     font-family: FiraSansExtraCondensed-SemiBold, sans-serif;
-    padding-left: 15px;
-}
-
-.new-note p {
     padding-left: 15px;
 }
 
@@ -89,13 +94,14 @@ li {
 }
 
 .button-task-new {
-    font-size: 50px;
-    top: -5px;
-    left: 190px;
+    font-size: 40px;
+    bottom: 0;
+    left: 223px;
 }
 
 .button-task-redact {
     font-size: 14px;
+    color: #9d9d9d;
 }
 
 .button-title-redact {
@@ -109,3 +115,22 @@ li {
     left: 225px;
 }
 
+.input {
+    color: #2c2c2c;
+    background-color: transparent;
+    border: none;
+}
+
+.input:focus {
+    outline: 0;
+}
+
+.input-title {
+    font-family: FiraSansExtraCondensed-SemiBold, sans-serif;
+    padding-left: 30px;
+}
+
+.input-task {
+    font-family: FiraSansExtraCondensed-ExtraLight, sans-serif;
+    font-size: 18px;
+}
