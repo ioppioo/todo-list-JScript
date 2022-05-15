@@ -4,19 +4,19 @@ function createRedactTaskButton() {
     let redactButton = document.createElement('button');
     redactButton.className = 'button button-task-redact';
     redactButton.innerText = '✎';
-    redactButton.addEventListener('click', taskText);
-    redactButton.addEventListener('click', titleText);
+    redactButton.addEventListener('click', createTaskText);
+    redactButton.addEventListener('click', createTitleText);
 
     return redactButton;
 }
 
-function taskText(event) {
+function createTaskText(event) {
     event.stopPropagation();
     let task = event.target.parentElement;
     replaceTaskWithInput(task);
 }
 
-function titleText(event) {
+function createTitleText(event) {
     event.stopPropagation();
     let note = event.target.parentElement;
     replaceTitleWithInput(note);
@@ -73,11 +73,12 @@ function createInput(text) {
     let input = document.createElement('input');
     input.value = text;
     input.onblur = replaceTaskWithInputHandler;
+    input.classList.add('input');
     input.classList.add('input-task');
+
     return input;
 }
 
-// что делает?
 
 function replaceTaskWithInputHandler(event) {
     let input = event.target;
@@ -123,7 +124,7 @@ for (let task of tasksText) {
 
 // создаем разметку новой задачи c полем ввода
 
-function newTask(task) {
+function createNewTask(task) {
     let createLi = document.createElement('li');
     let input = createInput('');
     createLi.classList.add('tasks__task');
@@ -146,51 +147,54 @@ function createNewTaskButton() {
 
 function addTask(event) {
     let task = event.target.parentElement.querySelector('.tasks');
-    newTask(task);
+    createNewTask(task);
 }
 
 // добавляем кнопку создания новой задачи
 
 let notes = document.querySelectorAll(".note");
 
-for (let newTask of notes) {
-    newTask.appendChild(createNewTaskButton());
+for (let button of notes) {
+    button.appendChild(createNewTaskButton());
+    button.appendChild(CreateDelButton());
 }
 
 // добавляет новую заметку
 
 function createNote(note) {
+
     let newNote = document.querySelector('.new-note');
     let divNote = document.createElement('div');
+    let color = replaceNoteColor();
+
+    // текст заметки
     let titleNote = document.createElement('h2');
+    let titleNoteText = document.createElement('span');
+    titleNote.classList.add('title-note');
+    titleNoteText.classList.add('title-note-text');
+    divNote.appendChild(titleNote);
+    titleNote.appendChild(titleNoteText);
+    titleNoteText.appendChild(createInput('Новая заметка'));
+    titleNote.append(createRedactTaskButton());
+
     let olNote = document.createElement('ol');
+    olNote.classList.add('tasks');
+
+    // создание новой задачи в новой заметке
     let liNote = document.createElement('li');
-    // let inputTitle = createInputTitleNote('');
-    let inputTask = createInput('');
-    let color = noteColor();
     liNote.classList.add('tasks__task');
-    liNote.appendChild(inputTask);
+    liNote.appendChild(createInput(''));
     note.appendChild(liNote);
-
-
-    // let textNewTask = document.createElement('span');
+    olNote.append(liNote);
+    liNote.append(createRedactTaskButton());
 
     divNote.classList.add('note');
     divNote.classList.toggle(color);
-    // olNote.classList.add('tasks');
-    // liNote.classList.add('tasks__task');
-    // textNewTask.classList.add('tasks_task-text');
-
-    titleNote.innerText = 'Заметка';
-    // textNewTask.innerText = 'Новая задача';
 
     newNote.before(divNote);
-    divNote.append(titleNote);
     divNote.append(olNote);
-    olNote.append(createNewTaskButton());
-    olNote.append(liNote);
-    // liNote.append(textNewTask);
-    liNote.append(createRedactTaskButton());
+    divNote.append(createNewTaskButton());
+    divNote.append(CreateDelButton());
 }
 
 // кнопка для создания новой заметки
@@ -212,7 +216,7 @@ newNote.appendChild(createNoteButton());
 
 // цвет новой заметки
 
-function noteColor() {
+function replaceNoteColor() {
     let colors = [
         'note--indianred',
         'note--lavender',
@@ -232,21 +236,8 @@ function CreateDelButton() {
     createDelButton.className = 'button button-task-del';
     createDelButton.innerText = '🞫';
     createDelButton.onclick = function () {
-        delButton();
-        noteColor();
+        createDelButton.parentElement.remove();
     }
 
     return createDelButton;
-}
-
-let noteList = document.querySelectorAll(".note");
-
-for (let note of noteList) {
-    note.appendChild(CreateDelButton());
-}
-
-function delButton() {
-    for (let note of noteList) {
-        note.remove();
-    }
 }

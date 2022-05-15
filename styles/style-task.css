@@ -12,6 +12,12 @@
     margin: 0;
 }
 
+.notes {
+    font-family: FiraSansExtraCondensed-ExtraLight, sans-serif;
+    font-size: 18px;
+    color: #2c2c2c;
+}
+
 .note {
     background-color: antiquewhite;
     width: 270px;
@@ -20,9 +26,6 @@
     display: inline-flex;
     flex-direction: column;
     position: relative;
-    font-family: FiraSansExtraCondensed-ExtraLight, sans-serif;
-    font-size: 18px;
-    color: #2c2c2c;
 }
 
 .title-note {
@@ -68,6 +71,12 @@
 .new-note {
     background-color: #fcf6f2;
     font-style: italic;
+    width: 270px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    display: inline-flex;
+    flex-direction: column;
+    position: relative;
     cursor: pointer;
 }
 
@@ -106,14 +115,22 @@
     left: 225px;
 }
 
-.input-task {
-    font-family: FiraSansExtraCondensed-ExtraLight, sans-serif;
-    font-size: 18px;
+.input {
     color: #2c2c2c;
     background-color: transparent;
     border: none;
 }
 
-.input-task:focus {
+.input:focus {
     outline: 0;
+}
+
+.input-title {
+    font-family: FiraSansExtraCondensed-SemiBold, sans-serif;
+    padding-left: 30px;
+}
+
+.input-task {
+    font-family: FiraSansExtraCondensed-ExtraLight, sans-serif;
+    font-size: 18px;
 }
