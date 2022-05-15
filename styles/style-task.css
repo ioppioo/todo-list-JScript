@@ -39,8 +39,20 @@
 
 /* цвет для заметки */
 
-.new-color {
-    background-color: #b7dbdc;
+.note--indianred {
+    background-color: indianred;
+}
+
+.note--lavender {
+    background-color: lavender;
+}
+
+.note--antiquewhite {
+    background-color: antiquewhite;
+}
+
+.note--teal {
+    background-color: #58a8a8;
 }
 
 /* стили для выполненных задач */
@@ -95,14 +107,11 @@
 }
 
 .input-task {
-    /*width: 75%;*/
-    /*height: 100%;*/
-    margin: 0;
     font-family: FiraSansExtraCondensed-ExtraLight, sans-serif;
     font-size: 18px;
     color: #2c2c2c;
-    /*background-color: transparent;*/
-    /*border: none;*/
+    background-color: transparent;
+    border: none;
 }
 
 .input-task:focus {

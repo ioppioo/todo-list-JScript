@@ -1,44 +1,35 @@
-// добавляет кнопку редактирования задачи и событие на кнопку с вызовом функции
-
-let tasks = document.querySelectorAll(".tasks__task");
-
-function createInput(text) {
-    let input = document.createElement('input');
-    input.value = text;
-    input.classList.add('input-task');
-
-    return input;
-}
-
-function replaceTaskWithInput(task) {
-    let taskText = task.querySelector('.tasks__task-text').innerText;
-    let input = createInput(taskText);
-    task.innerHTML = '';
-    task.appendChild(input);
-}
+// создаем кнопку редактирования
 
 function createRedactTaskButton() {
     let redactButton = document.createElement('button');
     redactButton.className = 'button button-task-redact';
     redactButton.innerText = '✎';
-    redactButton.onclick = function (event) {
-        event.stopPropagation();
-        let task = event.target.parentElement;
-        replaceTaskWithInput(task);
-    }
+    redactButton.addEventListener('click', taskText);
+    redactButton.addEventListener('click', titleText);
 
     return redactButton;
 }
 
-// подтверждение выполнения задачи
-for (let task of tasks) {
-    task.appendChild(createRedactTaskButton());
-    task.onclick = function () {
-        task.classList.toggle('done'); //добавляет класс
-    }
+function taskText(event) {
+    event.stopPropagation();
+    let task = event.target.parentElement;
+    replaceTaskWithInput(task);
 }
 
-// кнопка редактирования заголовка задачи
+function titleText(event) {
+    event.stopPropagation();
+    let note = event.target.parentElement;
+    replaceTitleWithInput(note);
+}
+
+// добавляем кнопку редактирования к задаче
+
+let tasks = document.querySelectorAll('.tasks__task');
+for (let task of tasks) {
+    task.appendChild(createRedactTaskButton());
+}
+
+// добавляем конпку редактирования заголовка заметки
 
 let titleTasks = document.querySelectorAll(".title-note");
 
@@ -46,97 +37,193 @@ for (let title of titleTasks) {
     title.appendChild(createRedactTaskButton());
 }
 
-// добавлет кнопку создания новой задачи
+// заменяем текущий заголовок заметки полем ввода
 
+function replaceTitleWithInput(title) {
+    let titleText = title.querySelector('.title-note-text').innerText;
+    let input = createInput(titleText); // создать новый
+    title.innerHTML = '';
+    title.appendChild(input);
+    input.focus();
+}
 
+// создаем новый текст заголовка
 
-let notes = document.querySelectorAll(".note");
+function createRedactNewTitle(text) {
+    let titleText = document.createElement('span');
+    titleText.classList.add('title-note-text');
+    titleText.innerText = text;
 
+    return titleText;
+}
 
+//заменяем текущую задачу полем ввода
+
+function replaceTaskWithInput(task) {
+    let taskText = task.querySelector('.tasks__task-text').innerText;
+    let input = createInput(taskText);
+    task.innerHTML = '';
+    task.appendChild(input);
+    input.focus();
+}
+
+//создаем поле ввода
+
+function createInput(text) {
+    let input = document.createElement('input');
+    input.value = text;
+    input.onblur = replaceTaskWithInputHandler;
+    input.classList.add('input-task');
+    return input;
+}
+
+// что делает?
+
+function replaceTaskWithInputHandler(event) {
+    let input = event.target;
+    replaceTaskWithInputText(input);
+}
+
+// создаем новый текст
+
+function createRedactNewText(text) {
+    let taskText = document.createElement('span');
+    taskText.classList.add('tasks__task-text');
+    taskText.innerText = text;
+    taskText.onclick = taskDone;
+
+    return taskText;
+}
+
+// заменяем поле ввода на новый текст, если текста нет, то удаляем. Добавляем конпку редактирования.
+function replaceTaskWithInputText(input) {
+    let newText = input.value;
+    let task = input.parentElement;
+    if (newText.trim() === '') {
+        task.remove();
+    } else {
+        task.innerHTML = '';
+        task.appendChild(createRedactNewText(newText));
+        task.appendChild(createRedactTaskButton());
+    }
+}
+
+// подтверждаем выполнения задачи
+
+function taskDone(event) {
+    let task = event.target.parentElement;
+    task.classList.toggle('done')
+}
+
+let tasksText = document.querySelectorAll(".tasks__task-text");
+
+for (let task of tasksText) {
+    task.onclick = taskDone;
+}
+
+// создаем разметку новой задачи c полем ввода
+
+function newTask(task) {
+    let createLi = document.createElement('li');
+    let input = createInput('');
+    createLi.classList.add('tasks__task');
+    createLi.appendChild(input);
+    task.appendChild(createLi);
+    // createLi.appendChild(createRedactTaskButton());
+    input.focus();
+}
+
+// создаем кнопку новой задачи
 
 function createNewTaskButton() {
     let newTaskButton = document.createElement('button');
     newTaskButton.className = 'button button-task-new';
     newTaskButton.innerText = '+';
-    newTaskButton.onclick = function (event) {
-        let task = event.target.parentElement;
-        addTask(task);
-    }
+    newTaskButton.onclick = addTask;
 
     return newTaskButton;
 }
+
+function addTask(event) {
+    let task = event.target.parentElement.querySelector('.tasks');
+    newTask(task);
+}
+
+// добавляем кнопку создания новой задачи
+
+let notes = document.querySelectorAll(".note");
 
 for (let newTask of notes) {
     newTask.appendChild(createNewTaskButton());
 }
 
-function addTask() {
-    let ol = document.querySelector('.tasks');
-    let createLi = document.createElement('li');
-    let createSpan = document.createElement('span');
-    ol.appendChild(createLi);
-    createLi.classList.add('tasks__task');
-    createLi.append(createSpan);
-    createLi.append(createRedactTaskButton());
-    createSpan.innerText = 'Новая задача';
-    createSpan.classList.add('tasks__task-text');
-
-}
-
-let noteList = document.querySelectorAll('.tasks');
-
-for (let i of noteList) {
-    i.prepend(createNewTaskButton());
-}
-
 // добавляет новую заметку
 
-function createNote() {
+function createNote(note) {
     let newNote = document.querySelector('.new-note');
     let divNote = document.createElement('div');
     let titleNote = document.createElement('h2');
     let olNote = document.createElement('ol');
     let liNote = document.createElement('li');
-    let textNewTask = document.createElement('span');
+    // let inputTitle = createInputTitleNote('');
+    let inputTask = createInput('');
+    let color = noteColor();
+    liNote.classList.add('tasks__task');
+    liNote.appendChild(inputTask);
+    note.appendChild(liNote);
+
+
+    // let textNewTask = document.createElement('span');
 
     divNote.classList.add('note');
-    titleNote.classList.add('title-note');
-    olNote.classList.add('tasks');
-    liNote.classList.add('tasks__task');
-    textNewTask.classList.add('tasks_task-text');
+    divNote.classList.toggle(color);
+    // olNote.classList.add('tasks');
+    // liNote.classList.add('tasks__task');
+    // textNewTask.classList.add('tasks_task-text');
 
     titleNote.innerText = 'Заметка';
-    textNewTask.innerText = 'Новая задача';
+    // textNewTask.innerText = 'Новая задача';
 
     newNote.before(divNote);
     divNote.append(titleNote);
     divNote.append(olNote);
     olNote.append(createNewTaskButton());
     olNote.append(liNote);
-    liNote.append(textNewTask);
+    // liNote.append(textNewTask);
     liNote.append(createRedactTaskButton());
 }
 
+// кнопка для создания новой заметки
+
 function createNoteButton() {
-    let newNoteButton = document.createElement('button');
-    newNoteButton.classList.add('newNoteButton');
-    newNoteButton.innerText = 'New note';
+    let newNoteButton = document.querySelector('.new-note');
     newNoteButton.onclick = function (event) {
-        let div = event.target.parentElement;
-        createNote(div);
+        let note = event.target.parentElement;
+        createNote(note);
     }
 
     return newNoteButton;
 }
 
-let newNote = document.querySelector('.new-note');
-newNote.append(createNoteButton());
+// добавляем новую заметку
 
-// function creatNewNoteButton () {
-//     let newNote = document.querySelector('.new-note');
-//     newNote.onclick = function ()
-//
-// }
+let newNote = document.querySelector('.new-note');
+newNote.appendChild(createNoteButton());
+
+// цвет новой заметки
+
+function noteColor() {
+    let colors = [
+        'note--indianred',
+        'note--lavender',
+        'note--antiquewhite',
+        'note--teal',
+    ];
+
+    let randomIndex = Math.floor(Math.random() * colors.length);
+
+    return colors[randomIndex];
+}
 
 // кнопка удаления заметки
 
@@ -146,18 +233,20 @@ function CreateDelButton() {
     createDelButton.innerText = '🞫';
     createDelButton.onclick = function () {
         delButton();
+        noteColor();
     }
 
-    return createDelButton
+    return createDelButton;
 }
 
-for (let delNote of notes) {
-    delNote.appendChild(CreateDelButton());
+let noteList = document.querySelectorAll(".note");
+
+for (let note of noteList) {
+    note.appendChild(CreateDelButton());
 }
 
-function delButton () {
-
-    let note = document.querySelector('.note')
-    note.remove();
-
+function delButton() {
+    for (let note of noteList) {
+        note.remove();
+    }
 }
