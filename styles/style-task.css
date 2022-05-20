@@ -13,6 +13,9 @@
 }
 
 .notes {
+    display: flex;
+    align-items: start;
+    flex-wrap: wrap;
     font-family: FiraSansExtraCondensed-ExtraLight, sans-serif;
     font-size: 18px;
     color: #2c2c2c;
@@ -23,27 +26,42 @@
     width: 270px;
     border-radius: 20px;
     margin-bottom: 10px;
-    display: inline-flex;
-    flex-direction: column;
+    margin-left: 10px;
     position: relative;
 }
 
 .title-note {
     font-family: FiraSansExtraCondensed-SemiBold, sans-serif;
-    padding-left: 15px;
-    max-width: 218px;
-    position: relative;
+    font-size: 28px;
+    margin: 0;
+    padding: 15px 35px 15px 15px;
+}
+
+.title-note textarea {
+    font-family: FiraSansExtraCondensed-SemiBold, sans-serif;
+    font-size: 28px;
+}
+
+.title-note-text {
+    line-height: 33px;
+    overflow-wrap: break-word;
 }
 
 .tasks {
-    margin-top: 0;
     padding-left: 30px;
+    padding-right: 20px;
+    padding-bottom: 25px;
+}
+
+.tasks__task-text {
+    line-height: 22px;
+    overflow-wrap: break-word;
 }
 
 /* цвет для заметки */
 
 .note--indianred {
-    background-color: indianred;
+    background-color: #e38c8c;
 }
 
 .note--lavender {
@@ -55,7 +73,7 @@
 }
 
 .note--teal {
-    background-color: #58a8a8;
+    background-color: #9cdede;
 }
 
 /* стили для выполненных задач */
@@ -74,6 +92,7 @@
     width: 270px;
     border-radius: 20px;
     margin-bottom: 10px;
+    margin-left: 10px;
     display: inline-flex;
     flex-direction: column;
     position: relative;
@@ -83,6 +102,11 @@
 .title-new-note {
     font-family: FiraSansExtraCondensed-SemiBold, sans-serif;
     padding-left: 15px;
+    padding-right: 15px;
+}
+
+.title-new-note textarea {
+    font-family: FiraSansExtraCondensed-SemiBold, sans-serif;
 }
 
 .button {
@@ -93,20 +117,14 @@
     color: #2c2c2c;
 }
 
+.edit-button {
+    color: #9d9d9d;
+}
+
 .button-task-new {
     font-size: 40px;
     bottom: 0;
     left: 223px;
-}
-
-.button-task-redact {
-    font-size: 14px;
-    color: #9d9d9d;
-}
-
-.button-title-redact {
-    font-size: 14px;
-    top: 6px;
 }
 
 .button-task-del {
@@ -116,21 +134,18 @@
 }
 
 .input {
+    width: 100%;
+    font-family: FiraSansExtraCondensed-ExtraLight, sans-serif;
+    padding: 0;
+    font-size: 18px;
     color: #2c2c2c;
     background-color: transparent;
     border: none;
+    overflow: hidden;
+    resize: none;
+    white-space: normal;
 }
 
 .input:focus {
     outline: 0;
-}
-
-.input-title {
-    font-family: FiraSansExtraCondensed-SemiBold, sans-serif;
-    padding-left: 30px;
-}
-
-.input-task {
-    font-family: FiraSansExtraCondensed-ExtraLight, sans-serif;
-    font-size: 18px;
 }
