@@ -216,6 +216,8 @@ function createNewNote() {
     let color = replaceNoteColor();
 
     divNote.classList.add('note');
+    let index = 0;
+    divNote.id = 'note' + (index+1);
     divNote.classList.toggle(color);
 
     newNote.before(divNote);
