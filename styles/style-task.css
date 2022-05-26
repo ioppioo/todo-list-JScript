@@ -40,22 +40,29 @@
 .title-note textarea {
     font-family: FiraSansExtraCondensed-SemiBold, sans-serif;
     font-size: 28px;
+    line-height: 22px;
+}
+
+.title-note textarea:focus {
+    font-family: FiraSansExtraCondensed-SemiBold, sans-serif;
+    font-size: 28px;
+    line-height: 33px;
 }
 
 .title-note-text {
     line-height: 33px;
-    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
 }
 
 .tasks {
     padding-left: 30px;
-    padding-right: 20px;
+    padding-right: 25px;
     padding-bottom: 25px;
 }
 
 .tasks__task-text {
     line-height: 22px;
-    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
 }
 
 /* цвет для заметки */
@@ -112,6 +119,7 @@
 .button {
     position: absolute;
     background-color: transparent;
+    padding-right: 0;
     border: none;
     cursor: pointer;
     color: #2c2c2c;
@@ -134,18 +142,21 @@
 }
 
 .input {
-    width: 100%;
+    width: 215px;
     font-family: FiraSansExtraCondensed-ExtraLight, sans-serif;
     padding: 0;
     font-size: 18px;
+    line-height: 18px;
     color: #2c2c2c;
     background-color: transparent;
     border: none;
     overflow: hidden;
     resize: none;
-    white-space: normal;
 }
 
 .input:focus {
-    outline: 0;
+    font-family: FiraSansExtraCondensed-ExtraLight, sans-serif;
+    line-height: 18px;
+    outline-color: rgba(44, 44, 44, 0.18);
+    outline-style: ridge;
 }

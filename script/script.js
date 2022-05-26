@@ -13,6 +13,7 @@ function createEditButton() {
 function createEditTitleButton() {
     let button = createEditButton();
     button.addEventListener('click', createTitleText);
+    saveNotes();
 
     return button;
 }
@@ -25,10 +26,10 @@ function createTitleText(event) {
 
 // добавляем кнопку редактирования заголовка заметки
 
-let titleTasks = document.querySelectorAll('.title-note');
-for (let title of titleTasks) {
-    title.appendChild(createEditTitleButton());
-}
+// let titleTasks = document.querySelectorAll('.title-note');
+// for (let title of titleTasks) {
+//     title.appendChild(createEditTitleButton());
+// }
 
 // заменяем текущий заголовок заметки полем ввода
 
@@ -59,7 +60,7 @@ function replaceInputWithTitle(event) {
 function createEditNewTitleText(text) {
     let titleText = document.createElement('span');
     titleText.classList.add('title-note-text');
-    titleText.innerText = text;
+    titleText.innerText = text.trim();
 
     return titleText;
 }
@@ -68,7 +69,7 @@ function replaceTitleWithInputText(input) {
     let newText = input.value;
     let title = input.parentElement;
     if (newText.trim() === '') {
-        window.setTimeout(input.focus(), 100);
+        window.setTimeout(() => input.focus, 100);
     } else {
         title.innerHTML = '';
         title.appendChild(createEditNewTitleText(newText));
@@ -81,6 +82,7 @@ function replaceTitleWithInputText(input) {
 function createEditTaskButton() {
     let button = createEditButton();
     button.addEventListener('click', createTaskText);
+    saveNotes();
 
     return button;
 }
@@ -93,10 +95,10 @@ function createTaskText(event) {
 
 // добавляем кнопку редактирования к задаче
 
-let tasks = document.querySelectorAll('.tasks__task');
-for (let task of tasks) {
-    task.appendChild(createEditTaskButton());
-}
+// let tasks = document.querySelectorAll('.tasks__task');
+// for (let task of tasks) {
+//     task.appendChild(createEditTaskButton());
+// }
 
 //заменяем текущую задачу полем ввода
 
@@ -127,7 +129,7 @@ function replaceInputWithTask(event) {
 function createEditNewTaskText(text) {
     let taskText = document.createElement('span');
     taskText.classList.add('tasks__task-text');
-    taskText.innerText = text;
+    taskText.innerText = text.trim();
     taskText.onclick = taskDone;
 
     return taskText;
@@ -162,23 +164,24 @@ function createInput(text, rows) {
 
 function taskDone(event) {
     let task = event.target.parentElement;
-    task.classList.toggle('done')
+    task.classList.toggle('done');
+    saveNotes();
 }
 
-let tasksText = document.querySelectorAll(".tasks__task-text");
-
-for (let task of tasksText) {
-    task.onclick = taskDone;
-}
+// let tasksText = document.querySelectorAll(".tasks__task-text");
+//
+// for (let task of tasksText) {
+//     task.onclick = taskDone;
+// }
 
 // создаем разметку новой задачи c полем ввода
 
 function createNewTask(task) {
-    let createLi = document.createElement('li');
+    let li = document.createElement('li');
     let input = createTaskInput('', 1);
-    createLi.classList.add('tasks__task');
-    createLi.appendChild(input);
-    task.appendChild(createLi);
+    li.classList.add('tasks__task');
+    li.appendChild(input);
+    task.appendChild(li);
 
     input.focus();
 }
@@ -216,8 +219,6 @@ function createNewNote() {
     let color = replaceNoteColor();
 
     divNote.classList.add('note');
-    let index = 0;
-    divNote.id = 'note' + (index+1);
     divNote.classList.toggle(color);
 
     newNote.before(divNote);
@@ -237,6 +238,7 @@ function createNewNote() {
     let olNote = document.createElement('ol');
     olNote.classList.add('tasks');
     divNote.append(olNote);
+
 }
 
 // добавление новой заметки
@@ -276,7 +278,36 @@ function createDelButton() {
     createDelButton.innerText = '🞫';
     createDelButton.onclick = function () {
         createDelButton.parentElement.remove();
+        saveNotes();
     }
 
     return createDelButton;
+}
+
+function createTodos () {
+    let todoList = [];
+    todoList.id = 'notesList';
+    let todos = document.querySelectorAll('.note');
+
+    for (const todo of todos) {
+        const note = {
+            color: todo.classList[1],
+            title: todo.querySelector('.title-note-text').innerText.trim()
+        }
+        todoList.push(note);
+        note.taskList = [];
+        let tasksElements = todo.querySelectorAll('.tasks__task');
+        for (const task of tasksElements) {
+            note.taskList.push({
+                task: task.querySelector('.tasks__task-text').innerText.trim(),
+                taskDone: task.classList.contains('done')
+            })
+        }
+    }
+
+    return todoList;
+}
+
+function saveNotes () {
+    localStorage.setItem('notes', JSON.stringify(createTodos()));
 }
