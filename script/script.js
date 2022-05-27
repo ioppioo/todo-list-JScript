@@ -238,7 +238,6 @@ function createNewNote() {
     let olNote = document.createElement('ol');
     olNote.classList.add('tasks');
     divNote.append(olNote);
-
 }
 
 // добавление новой заметки
@@ -284,9 +283,8 @@ function createDelButton() {
     return createDelButton;
 }
 
-function createTodos () {
+function createTodos() {
     let todoList = [];
-    todoList.id = 'notesList';
     let todos = document.querySelectorAll('.note');
 
     for (const todo of todos) {
@@ -309,5 +307,8 @@ function createTodos () {
 }
 
 function saveNotes () {
-    localStorage.setItem('notes', JSON.stringify(createTodos()));
+    localStorage.setItem('todos', JSON.stringify(createTodos()));
 }
+
+let savedNotes = JSON.parse(localStorage.getItem('todos'));
+savedNotes.forEach(createNewNote);
