@@ -62,7 +62,7 @@ function replaceTitleWithInputText(input) {
     let newText = input.value;
     let title = input.parentElement;
     if (newText.trim() === '') {
-        window.setTimeout(() => input.focus, 100);
+        window.setTimeout(() => input.focus(), 100);
     } else {
         title.innerHTML = '';
         title.appendChild(createEditNewTitleText(newText));
